@@ -5,6 +5,11 @@ result = [
     "результат: 2"
 ]
 
-for string_result in result:
-    number = int(string_result.split()[-1]) + 10
-    print(number)
+
+def print_results(result_list):
+    for string_result in result_list:
+        number = int(string_result.split()[-1]) + 10
+        print(number)
+
+
+print_results(result)
