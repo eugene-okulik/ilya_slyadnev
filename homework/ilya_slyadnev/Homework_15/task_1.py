@@ -15,7 +15,7 @@ title_book_v2 = fake.catch_phrase()
 
 load_dotenv()
 
-# Перменные для подключения
+# Переменные для подключения
 db_host = os.getenv('DB_HOST')
 db_port = os.getenv('DB_PORT')
 db_user = os.getenv('DB_USER')
