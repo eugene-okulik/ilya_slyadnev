@@ -100,7 +100,7 @@ try:
         (student_id,)
     )
     books_student = cursor.fetchall()
-    print(f"Все книги студента", books_student)
+    print("Все книги студента", books_student)
 
     sql_info_student = """
     SELECT
@@ -130,7 +130,7 @@ try:
 
     cursor.execute(sql_info_student, (student_id,))
     info_student = cursor.fetchall()
-    print(f"Все о студенте", info_student)
+    print("Все о студенте", info_student)
 
     db.commit()
     cursor.close()
