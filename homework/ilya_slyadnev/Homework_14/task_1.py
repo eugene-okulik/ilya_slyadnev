@@ -68,7 +68,8 @@ for subject_id in subject_ids:
     for lesson_id in lesson_ids:
         for mark_value in marks_values:
             insert_and_get_id(cursor,
-                              f"INSERT INTO marks (value, lesson_id, student_id) VALUES ('{mark_value}', {lesson_id}, {student_id})")
+                              f"INSERT INTO marks (value, lesson_id, student_id) VALUES ('{mark_value}', {lesson_id}, "
+                              f"{student_id})")
 
 sql_select_marks = f"SELECT value FROM marks WHERE student_id={student_id}"
 cursor.execute(sql_select_marks)
