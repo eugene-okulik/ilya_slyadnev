@@ -1,11 +1,20 @@
 import requests
-import pytest
+
+url = "https://api.restful-api.dev/objects"
 
 
-# Фикстура для создания нового объекта и возвращения его ID
-@pytest.fixture
-def object_id():
-    response = requests.post("https://api.restful-api.dev/objects", json={
+def send_request(method, url, data=None):
+    try:
+        response = requests.request(method, url, json=data)
+        response.raise_for_status()
+        return response
+    except requests.RequestException as e:
+        print(f"Ошибка запроса: {e}")
+        raise
+
+
+def create_object():
+    data = {
         "name": "Apple MacBook Pro 16",
         "data": {
             "year": 2019,
@@ -13,14 +22,16 @@ def object_id():
             "CPU model": "Intel Core i9",
             "Hard disk size": "1 TB"
         }
-    })
+    }
+    response = send_request("POST", url, data)
+    response_data = response.json()
+    assert response_data.get("name") == data["name"]
+    assert response_data.get("data") == data["data"]
+    return response_data.get("id")
 
-    assert response.status_code == 200
-    return response.json()["id"]
 
-
-def test_update_object(object_id):
-    response = requests.put(f"https://api.restful-api.dev/objects/{object_id}", json={
+def update_object(object_id):
+    data = {
         "name": "Apple MacBook Air M3",
         "data": {
             "year": 2024,
@@ -28,19 +39,33 @@ def test_update_object(object_id):
             "CPU model": "Apple M3",
             "Hard disk size": "1 TB"
         }
-    })
-    assert response.status_code == 200
+    }
+    response = send_request("PUT", f"{url}/{object_id}", data)
+    response_data = response.json()
+    assert response_data.get("name") == data["name"]
+    assert response_data.get("data") == data["data"]
 
 
-def test_partially_update_object(object_id):
-    response = requests.patch(f"https://api.restful-api.dev/objects/{object_id}", json={
+def partially_update_object(object_id):
+    data = {
         "name": "Apple MacBook PRO MAX M3"
-    })
-    assert response.status_code == 200
+    }
+    response = send_request("PATCH", f"{url}/{object_id}", data)
+    response_data = response.json()
+    assert response_data.get("name") == data["name"]
 
 
-def test_delete_object(object_id):
-    response = requests.delete(f"https://api.restful-api.dev/objects/{object_id}")
-    assert response.status_code == 200
+def delete_object(object_id):
+    response = send_request("DELETE", f"{url}/{object_id}")
+    response_data = response.json()
+    assert response_data == {"message": f"Object with id = {object_id} has been deleted."}
 
-    assert response.json() == {"message": f"Object with id = {object_id} has been deleted."}
+
+object_id = create_object()
+print(f"Создан объект с ID: {object_id}")
+update_object(object_id)
+print("Успешно обновлен с помощью метода PUT")
+partially_update_object(object_id)
+print("Успешно обновлен с помощью метода PATCH")
+delete_object(object_id)
+print("Объект удален")
