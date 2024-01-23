@@ -44,3 +44,6 @@ def test_delete_object(object_id):
     assert response.status_code == 200
 
     assert response.json() == {"message": f"Object with id = {object_id} has been deleted."}
+
+
+test_delete_object(object_id())
