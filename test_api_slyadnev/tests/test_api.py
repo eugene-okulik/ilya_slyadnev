@@ -1,7 +1,7 @@
 import pytest
 
 from test_api_slyadnev.endpoints.assertions import Assertion
-from test_api_slyadnev.utils.test_data import *
+from test_api_slyadnev.utils.test_data import CREATE_OBJECT_DATA
 
 
 @pytest.mark.parametrize('data', CREATE_OBJECT_DATA)
