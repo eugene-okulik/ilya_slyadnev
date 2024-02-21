@@ -28,4 +28,4 @@ CREATE_OBJECT_DATA = [
             "Hard disk size": "512 GB"
         }
     }
-    ]
+]
