@@ -11,7 +11,7 @@ result_text = ('xpath', '//p[@id="result-text"]')
 
 def test_input_form():
     driver = webdriver.Chrome()
-    wait = WebDriverWait(driver, 10)
+    WebDriverWait(driver, 10)
 
     driver.get("https://www.qa-practice.com/elements/input/simple")
     test_text = "Valid-Text_123"
