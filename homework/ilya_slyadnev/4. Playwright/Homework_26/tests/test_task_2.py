@@ -29,5 +29,9 @@ def test_fill_practice_form():
 
         page.locator("#submit").click()
         page.wait_for_timeout(1000)
+        modal_title = page.locator("#example-modal-sizes-title-lg")
+
+        expect(modal_title).to_be_visible()
+        expect(modal_title).to_have_text("Thanks for submitting the form")
 
         browser.close()
