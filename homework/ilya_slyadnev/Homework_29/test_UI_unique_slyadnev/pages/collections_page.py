@@ -1,5 +1,6 @@
 from pages.base_page import BasePage
 
+
 class CollectionsPage(BasePage):
     URL = "https://magento.softwaretestingboard.com/collections/eco-friendly.html"
 

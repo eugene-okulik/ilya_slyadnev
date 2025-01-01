@@ -1,5 +1,6 @@
 from pages.base_page import BasePage
 
+
 class SalePage(BasePage):
     URL = "https://magento.softwaretestingboard.com/sale.html"
 

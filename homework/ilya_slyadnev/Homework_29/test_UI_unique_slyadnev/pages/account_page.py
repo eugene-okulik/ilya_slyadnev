@@ -1,5 +1,6 @@
 from pages.base_page import BasePage
 
+
 class AccountPage(BasePage):
     URL = "https://magento.softwaretestingboard.com/customer/account/create/"
 

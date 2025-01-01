@@ -1,5 +1,6 @@
 from playwright.sync_api import expect
 
+
 class TestSalePage:
     def test_page_title(self, sale_page):
         sale_page.open()
