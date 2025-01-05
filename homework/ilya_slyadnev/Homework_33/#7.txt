@@ -1,0 +1,129 @@
+Started by user Сляднев И.К
+Obtained Jenkinsfile from git https://github.com/ik-slyadnev/hw33
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/aqa
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/aqa/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/ik-slyadnev/hw33 # timeout=10
+Fetching upstream changes from https://github.com/ik-slyadnev/hw33
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.5'
+ > git fetch --tags --force --progress -- https://github.com/ik-slyadnev/hw33 +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 507b039114847f66a651e9634a910b3a02181160 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 507b039114847f66a651e9634a910b3a02181160 # timeout=10
+Commit message: "Update Jenkinsfile"
+ > git rev-list --no-walk ab29565e654a8f489ad4d68a997ac386e0401695 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/aqa/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/ik-slyadnev/hw33 # timeout=10
+Fetching upstream changes from https://github.com/ik-slyadnev/hw33
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.5'
+ > git fetch --tags --force --progress -- https://github.com/ik-slyadnev/hw33 +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 507b039114847f66a651e9634a910b3a02181160 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 507b039114847f66a651e9634a910b3a02181160 # timeout=10
+Commit message: "Update Jenkinsfile"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build and Run Tests)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ docker build -t playwright-tests .
+#1 [internal] load build definition from Dockerfile
+#1 sha256:254040e90d289b9d9638e0bf150ff4c9e859e73443c6085e984060fec3e51f82
+#1 transferring dockerfile: 738B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.12-slim
+#2 sha256:99b1e2dad1b45792a1573d5fb528e05b199ae12ef791298793f1aff0ddf1f444
+#2 DONE 1.0s
+
+#3 [internal] load .dockerignore
+#3 sha256:683ab645283274900f9c5e692be4f08444c578b8fd7ec78db0d0806f33c48119
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#11 [1/7] FROM docker.io/library/python:3.12-slim@sha256:10f3aaab98db50cba827d3b33a91f39dc9ec2d02ca9b85cbc5008220d07b17f3
+#11 sha256:137b0279d3c258625e8710ad6562a680243a53a9372e94d2cf0851ee5cad67e1
+#11 DONE 0.0s
+
+#8 [internal] load build context
+#8 sha256:67ff91132ca6c9c98af92469488b5e47030c91782e93a86693cf4759d95e8677
+#8 transferring context: 9.76kB done
+#8 DONE 0.0s
+
+#7 [4/7] COPY requirements.txt .
+#7 sha256:bb99739dced5bac38b2d9a284c3939fe769330836ea205994488ffd5fd0a0c7b
+#7 CACHED
+
+#10 [2/7] RUN apt-get update && apt-get install -y     wget     gnupg     libglib2.0-0     libnss3     libnspr4     libatk1.0-0     libatk-bridge2.0-0     libcups2     libdrm2     libdbus-1-3     libexpat1     libxcb1     libxkbcommon0     libx11-6     libxcomposite1     libxdamage1     libxext6     libxfixes3     libxrandr2     libgbm1     libpango-1.0-0     libcairo2     libasound2     libatspi2.0-0     && rm -rf /var/lib/apt/lists/*
+#10 sha256:0bc543a585a9da2c2c9af9ee71590f6ccb94f5ca00f97b9862ced7db1559de18
+#10 CACHED
+
+#9 [3/7] WORKDIR /tests
+#9 sha256:308de7ef54d092b72787797938e6602ed1047260478d62aa9ed16729016c28ba
+#9 CACHED
+
+#6 [5/7] RUN pip install --upgrade pip &&     pip install --no-cache-dir -r requirements.txt
+#6 sha256:168ce8a8d9d9c8cecbc392a5875df81e40512b4cbda2121ab5e8fada1247009e
+#6 CACHED
+
+#5 [6/7] RUN playwright install chromium
+#5 sha256:44fdcfb100c370d3d3304eb7358194bf9f7a47144e7ef3b4575e6970e9d2b8f8
+#5 CACHED
+
+#4 [7/7] COPY . .
+#4 sha256:d379f3a3757d6b627eb1b6e4efeb0516a76c6cd4a0181ba2b5f6501d9f1aa2b3
+#4 DONE 0.0s
+
+#12 exporting to image
+#12 sha256:0d1eba89b9c21f7d4ee530b8d1d771066b1f808759614963c276aab4c834e08a
+#12 exporting layers done
+#12 writing image sha256:efe19328261131f358733a744c78afc7937821e7551008984285b28d1b42e7ee done
+#12 naming to docker.io/library/playwright-tests:latest done
+#12 DONE 0.0s
++ docker run playwright-tests
+============================= test session starts ==============================
+platform linux -- Python 3.12.8, pytest-8.0.0, pluggy-1.5.0 -- /usr/local/bin/python3.12
+cachedir: .pytest_cache
+rootdir: /tests
+plugins: base-url-2.1.0, playwright-0.6.2
+collecting ... collected 1 item
+
+tests/test_search.py::test_okulik_page[chromium] PASSED                  [100%]
+
+============================== 1 passed in 3.94s ===============================
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
