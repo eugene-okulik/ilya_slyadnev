@@ -1,0 +1,290 @@
+Started by user Сляднев И.К.
+Obtained Jenkinsfile from git https://github.com/ik-slyadnev/hw_34.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/qa1
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/ik-slyadnev/hw_34.git
+ > git init /var/jenkins_home/workspace/qa1 # timeout=10
+Fetching upstream changes from https://github.com/ik-slyadnev/hw_34.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.5'
+ > git fetch --tags --force --progress -- https://github.com/ik-slyadnev/hw_34.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/ik-slyadnev/hw_34.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 55c55485fcfdb4abb3da6b8faf100952a83f2622 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 55c55485fcfdb4abb3da6b8faf100952a83f2622 # timeout=10
+Commit message: "Update Jenkinsfile"
+First time build. Skipping changelog.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Tool Install)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/qa1/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/ik-slyadnev/hw_34.git # timeout=10
+Fetching upstream changes from https://github.com/ik-slyadnev/hw_34.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.5'
+ > git fetch --tags --force --progress -- https://github.com/ik-slyadnev/hw_34.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 55c55485fcfdb4abb3da6b8faf100952a83f2622 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 55c55485fcfdb4abb3da6b8faf100952a83f2622 # timeout=10
+Commit message: "Update Jenkinsfile"
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Prepare)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ echo Cleaning up previous results...
+Cleaning up previous results...
++ rm -rf /var/jenkins_home/workspace/qa1/allure-results
++ rm -rf /var/jenkins_home/workspace/qa1/allure-report
++ echo Creating allure-results directory...
+Creating allure-results directory...
++ mkdir -p /var/jenkins_home/workspace/qa1/allure-results
++ chmod -R 777 /var/jenkins_home/workspace/qa1/allure-results
++ echo Created allure-results directory:
+Created allure-results directory:
++ ls -la /var/jenkins_home/workspace/qa1/allure-results
+total 8
+drwxrwxrwx 2 root root 4096 Jan  6 17:56 .
+drwxr-xr-x 7 root root 4096 Jan  6 17:56 ..
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build and Run Tests)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ echo Building Docker image...
+Building Docker image...
++ docker build -t playwright-tests .
+#1 [internal] load build definition from Dockerfile
+#1 sha256:5c8b29d9778031cd832ad0a5cbb4a243b5b89516c252ec5e169dbd7182da0c9a
+#1 transferring dockerfile: 1.54kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.12-slim
+#2 sha256:99b1e2dad1b45792a1573d5fb528e05b199ae12ef791298793f1aff0ddf1f444
+#2 DONE 1.0s
+
+#3 [internal] load .dockerignore
+#3 sha256:b83347c05f852fa5717a1c4857321da20a2c4eb6357dc64aea503ab99693c28a
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#13 [1/9] FROM docker.io/library/python:3.12-slim@sha256:10f3aaab98db50cba827d3b33a91f39dc9ec2d02ca9b85cbc5008220d07b17f3
+#13 sha256:137b0279d3c258625e8710ad6562a680243a53a9372e94d2cf0851ee5cad67e1
+#13 DONE 0.0s
+
+#9 [internal] load build context
+#9 sha256:7da9d5c27efe9ac77a3e9e38f6074863105e283fcb263e22ad2b091788bb8eac
+#9 transferring context: 89.02kB 0.0s done
+#9 DONE 0.0s
+
+#7 [6/9] RUN pip install --upgrade pip &&     pip install --no-cache-dir -r requirements.txt
+#7 sha256:efdee9dfb8575477aa265a5bc21ce9bb9c382ec9791b828a93894efeaf4d9eb7
+#7 CACHED
+
+#10 [4/9] RUN mkdir -p /tests/allure-results &&     chmod -R 777 /tests/allure-results &&     chown -R root:root /tests
+#10 sha256:dcb4749753683f96810a75cae982471000e9f1da6977516a7e95f30f9bff0d93
+#10 CACHED
+
+#8 [5/9] COPY requirements.txt .
+#8 sha256:860b148b1e689a2ae5815e1b171a9129232a957cc5be41bf8939f3b342dbe16b
+#8 CACHED
+
+#12 [2/9] RUN apt-get update && apt-get install -y     default-jdk     wget     gnupg     libglib2.0-0     libnss3     libnspr4     libatk1.0-0     libatk-bridge2.0-0     libcups2     libdrm2     libdbus-1-3     libexpat1     libxcb1     libxkbcommon0     libx11-6     libxcomposite1     libxdamage1     libxext6     libxfixes3     libxrandr2     libgbm1     libpango-1.0-0     libcairo2     libasound2     libatspi2.0-0     && rm -rf /var/lib/apt/lists/*
+#12 sha256:04d949e1f1ae18462fec9ba6641b7a304c55eeb2ce08d1d971d1eca7c8b5eb5e
+#12 CACHED
+
+#6 [7/9] RUN playwright install chromium
+#6 sha256:3a1f10a88da8b2c3af0108a7726d99f6885d94894c55acea20546c7f809041f7
+#6 CACHED
+
+#11 [3/9] WORKDIR /tests
+#11 sha256:b8bfb5c6636083f99992c3825c1987b589c42d73999b4da784850a6a2c13d035
+#11 CACHED
+
+#5 [8/9] RUN wget https://github.com/allure-framework/allure2/releases/download/2.25.0/allure-2.25.0.tgz &&     tar -zxvf allure-2.25.0.tgz -C /opt/ &&     ln -s /opt/allure-2.25.0/bin/allure /usr/local/bin/allure &&     rm allure-2.25.0.tgz
+#5 sha256:e3ebacaea3b69ed89c80234881f73b3fd3a1fd341c7094c91911225bf63301ec
+#5 CACHED
+
+#4 [9/9] COPY . .
+#4 sha256:c0d6a96e6cb689080aa9ef035e9e9c250f82d2c48bbe78f60c456572384ac4df
+#4 DONE 0.0s
+
+#14 exporting to image
+#14 sha256:ac7839c3578220adcf703422e8f6175db80a8d0d9ec917b164fed78d5d9bae2c
+#14 exporting layers done
+#14 writing image sha256:7b79005c35baa813a1a303692e0b48d21de3c795d1c4dc5de12e34c67f84a002 done
+#14 naming to docker.io/library/playwright-tests:latest done
+#14 DONE 0.0s
++ echo Running tests...
+Running tests...
++ docker run --rm -v /var/jenkins_home/workspace/qa1/allure-results:/tests/allure-results:rw --user root playwright-tests
+total 8
+drwxr-xr-x 2 root root   40 Jan  6 17:56 .
+drwxr-xr-x 1 root root 4096 Jan  6 17:56 ..
+============================= test session starts ==============================
+platform linux -- Python 3.12.8, pytest-8.3.4, pluggy-1.5.0 -- /usr/local/bin/python3.12
+cachedir: .pytest_cache
+rootdir: /tests
+plugins: allure-pytest-2.13.5, base-url-2.1.0, playwright-0.6.2, Faker-33.1.3
+collecting ... collected 9 items
+
+tests/test_account.py::TestRegistrationPage::test_valid_registration[chromium] PASSED [ 11%]
+tests/test_account.py::TestRegistrationPage::test_short_password[chromium] PASSED [ 22%]
+tests/test_account.py::TestRegistrationPage::test_empty_email[chromium] PASSED [ 33%]
+tests/test_collections.py::TestCollectionsPage::test_products_display[chromium] PASSED [ 44%]
+tests/test_collections.py::TestCollectionsPage::test_sort_dropdown_presence[chromium] PASSED [ 55%]
+tests/test_collections.py::TestCollectionsPage::test_page_title[chromium] PASSED [ 66%]
+tests/test_sale.py::TestSalePage::test_page_title[chromium] PASSED       [ 77%]
+tests/test_sale.py::TestSalePage::test_view_side_bar[chromium] PASSED    [ 88%]
+tests/test_sale.py::TestSalePage::test_view_promo[chromium] PASSED       [100%]
+
+============================== 9 passed in 29.47s ==============================
++ echo Contents of allure-results after tests:
+Contents of allure-results after tests:
++ ls -la /var/jenkins_home/workspace/qa1/allure-results/
+total 8
+drwxrwxrwx 2 root root 4096 Jan  6 17:56 .
+drwxr-xr-x 7 root root 4096 Jan  6 17:56 ..
++ echo Number of JSON files in results:
+Number of JSON files in results:
++ find /var/jenkins_home/workspace/qa1/allure-results -name *.json
++ wc -l
+0
++ echo Fixing permissions...
+Fixing permissions...
++ chmod -R 777 /var/jenkins_home/workspace/qa1/allure-results
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Generate Allure Report)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ echo Contents before generating report:
+Contents before generating report:
++ ls -la /var/jenkins_home/workspace/qa1/allure-results/
+total 8
+drwxrwxrwx 2 root root 4096 Jan  6 17:56 .
+drwxr-xr-x 7 root root 4096 Jan  6 17:56 ..
++ echo Sample of JSON files (first 3):
+Sample of JSON files (first 3):
++ find /var/jenkins_home/workspace/qa1/allure-results -name *.json -exec head -n 20 {} ;
++ head -n 60
+[Pipeline] allure
+[qa1] $ /var/jenkins_home/tools/ru.yandex.qatools.allure.jenkins.tools.AllureCommandlineInstallation/allure/bin/allure generate -c -o /var/jenkins_home/workspace/qa1/allure-report
+Report successfully generated to /var/jenkins_home/workspace/qa1/allure-report
+Allure report was successfully generated.
+Creating artifact for the build.
+Artifact was added to the build.
+[Pipeline] sh
++ echo Generated report contents:
+Generated report contents:
++ ls -la /var/jenkins_home/workspace/qa1/allure-report/
+total 2392
+drwxr-xr-x 7 root root    4096 Jan  6 17:57 .
+drwxr-xr-x 8 root root    4096 Jan  6 17:57 ..
+-rw-r--r-- 1 root root  791996 Jan  6 17:57 app.js
+drwxr-xr-x 2 root root    4096 Jan  6 17:57 data
+drwxr-xr-x 2 root root    4096 Jan  6 17:57 export
+-rw-r--r-- 1 root root   15406 Jan  6 17:57 favicon.ico
+drwxr-xr-x 2 root root    4096 Jan  6 17:57 history
+-rw-r--r-- 1 root root    1146 Jan  6 17:57 index.html
+drwxr-xr-x 5 root root    4096 Jan  6 17:57 plugin
+-rw-r--r-- 1 root root 1601815 Jan  6 17:57 styles.css
+drwxr-xr-x 2 root root    4096 Jan  6 17:57 widgets
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] echo
+Archiving artifacts...
+[Pipeline] archiveArtifacts
+Archiving artifacts
+‘allure-results/**/*’ doesn’t match anything, but ‘**/*’ does. Perhaps that’s what you mean?
+No artifacts found that match the file pattern "allure-results/**/*". Configuration error?
+[Pipeline] archiveArtifacts
+Archiving artifacts
+Recording fingerprints
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] cleanWs
+[WS-CLEANUP] Deleting project workspace...
+[WS-CLEANUP] Deferred wipeout is disabled by the job configuration...
+[WS-CLEANUP] done
+[Pipeline] echo
+Build succeeded! Allure report should be available.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
